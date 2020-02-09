@@ -15,3 +15,7 @@ from (employees natural join titles) inner join salaries
 on employees.emp_no=salaries.emp_no and titles.to_date = salaries.to_date
 where salaries.to_date = '9999-01-01' and (not title = 'Senior Engineer')
 order by salary;
+
+select first_name, last_name, birth_date
+from employees
+order by birth_date desc;
