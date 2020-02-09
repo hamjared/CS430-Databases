@@ -19,3 +19,7 @@ order by salary;
 select first_name, last_name, birth_date
 from employees
 order by birth_date desc;
+
+select first_name, last_name
+from employees natural join dept_manager
+where to_date = '9999-01-01';
