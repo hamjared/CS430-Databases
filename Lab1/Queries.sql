@@ -23,5 +23,7 @@ select first_name, last_name
 from employees natural join dept_manager
 where to_date = '9999-01-01';
 
-select first_name, last_name
-from
+select first_name, last_name, dept_name
+from (employees natural join current_dept_emp) natural join departments join salaries using(emp_no, to_date)
+where to_date = '9999-01-01'
+having max(salary);
