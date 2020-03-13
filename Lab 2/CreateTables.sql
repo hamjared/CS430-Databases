@@ -35,3 +35,27 @@ create table Phone (
   Type VarChar(10),
   PRIMARY KEY(PNumber)
 )
+
+create table WrittenBy (
+  ISBN VarChar (20),
+  AuthorID Integer,
+  PRIMARY KEY (ISBN, AuthorID)
+  FOREIGN KEY (ISBN) REFERENCES Book,
+  FOREIGN KEY (AuthorID) REFERENCES Author
+)
+
+create table PublisherToPhoneNumber (
+  PubID Integer,
+  PNumber Integer,
+  PRIMARY KEY (PubID, PNumber),
+  FOREIGN KEY (PubID) REFERENCES Publisher ON DELETE CASCADE,
+  FOREIGN KEY (PNumber) REFERENCES Phone
+)
+
+create table AuthorToPhoneNumber (
+  AuthorID Integer,
+  PNumber Integer,
+  PRIMARY KEY (AuthorID, PNumber),
+  FOREIGN KEY (AuthorID) REFERENCES Author ON DELETE CASCADE,
+  FOREIGN KEY (PNumber) REFERENCES Phone
+)
