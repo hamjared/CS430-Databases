@@ -1,3 +1,4 @@
+from Authors import writeFile
 
 def main():
     commaParseFile("./Data/Publisher.txt")
@@ -6,7 +7,6 @@ def main():
 def commaParseFile(filename):
     f=open(filename, "r")
     line_list = f.read().splitlines()
-    print (line_list)
     insertPublishers = 'INSERT INTO Publisher VALUES\n'
     insertPublishersToPhoneNumber = 'INSERT INTO PublisherToPhoneNumber VALUES\n'
     for line in line_list:
@@ -16,12 +16,11 @@ def commaParseFile(filename):
         pubPhoneNumber = split_line[2][1:].split(" ")[0]
         insertPublishers += "({}, \'{}\'),\n".format(pubID, name)
         insertPublishersToPhoneNumber += "({}, \'{}\'),\n".format(pubID, pubPhoneNumber)
-
+    f.close()
     insertPublishers = insertPublishers[:-2] + ";"
     insertPublishersToPhoneNumber = insertPublishersToPhoneNumber[:-2] + ";"
-    print(insertPublishers)
-    print("---------------------------------------")
-    print(insertPublishersToPhoneNumber)
+    writeFile(insertPublishers, "SQLScripts/insertPublishers.sql")
+    writeFile(insertPublishersToPhoneNumber, "SQLScripts/insertPhoneNumbersPublishers.sql")
 
 
 
