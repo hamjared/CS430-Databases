@@ -21,7 +21,7 @@ create table Publisher (
   PubID Integer,
   Pub_name VarChar(50),
   PRIMARY KEY(PubID)
-)
+);
 
 create table Author (
   AuthorID Integer,
@@ -46,16 +46,16 @@ create table WrittenBy (
 
 create table PublisherToPhoneNumber (
   PubID Integer,
-  PNumber Integer,
+  PNumber varchar(20),
   PRIMARY KEY (PubID, PNumber),
-  FOREIGN KEY (PubID) REFERENCES Publisher ON DELETE CASCADE,
-  FOREIGN KEY (PNumber) REFERENCES Phone
-)
+  FOREIGN KEY (PubID) REFERENCES Publisher(PubID) ON DELETE CASCADE,
+  FOREIGN KEY (PNumber) REFERENCES Phone(PNumber)
+);
 
 create table AuthorToPhoneNumber (
-  AuthorID Integer,
-  PNumber Integer,
+  AuthorID Integer(11),
+  PNumber varchar(20),
   PRIMARY KEY (AuthorID, PNumber),
-  FOREIGN KEY (AuthorID) REFERENCES Author ON DELETE CASCADE,
-  FOREIGN KEY (PNumber) REFERENCES Phone
-)
+  FOREIGN KEY (AuthorID) REFERENCES Author(AuthorID) ON DELETE CASCADE,
+  FOREIGN KEY (PNumber) REFERENCES Phone(PNumber)
+);

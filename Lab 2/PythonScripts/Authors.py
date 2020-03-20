@@ -22,7 +22,7 @@ def commaParseFile(filename):
     insertAuthors = insertAuthors[:-2] + ";"
     insertAuthorToPhoneNumber = insertAuthorToPhoneNumber[:-2] + ";"
     insertPhoneNumber = insertPhoneNumber[:-2] + ";"
-    removeDuplicatePhoneNumbers(insertPhoneNumber)
+    insertPhoneNumber = removeDuplicatePhoneNumbers(insertPhoneNumber)
     writeFile(insertAuthors, "SQLScripts/insertAuthors.sql")
     writeFile(insertAuthorToPhoneNumber, "SQLScripts/insertAuthorToPhoneNumber.sql")
     writeFile(insertPhoneNumber, "SQLScripts/insertPhoneNumber.sql")
@@ -42,7 +42,7 @@ def parsePhoneNumbers(phoneNumbers, authorID):
             type = split_line[1]
         except(IndexError):
             continue
-        authorToPhoneNumber = authorToPhoneNumber + "(\'{}\', \'{}\'),\n".format(number, authorID)
+        authorToPhoneNumber = authorToPhoneNumber + "({}, \'{}\'),\n".format(authorID, number)
         insertIntoPhoneNumber += "(\'{}\', \'{}\'),\n".format(number, type)
     return authorToPhoneNumber, insertIntoPhoneNumber
 
@@ -56,12 +56,12 @@ def removeDuplicatePhoneNumbers(insertPhoneNumberCommand):
             number = line.split('\'')[1]
             if number not in numbers:
                 newLines.append(line)
-                numbers.append(numbers)
+                numbers.append(number)
 
         except (IndexError):
             continue
-
-    print('\n'.join(newLines))
+    # print('\n'.join(newLines))
+    return 'INSERT INTO Phone VALUES\n' + '\n'.join(newLines)
 
 
 
