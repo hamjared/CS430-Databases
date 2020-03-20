@@ -31,10 +31,10 @@ create table Author (
 )
 
 create table Phone (
-  PNumber Integer,
+  PNumber VarChar(20),
   Type VarChar(10),
   PRIMARY KEY(PNumber)
-)
+);
 
 create table WrittenBy (
   ISBN VarChar (20),

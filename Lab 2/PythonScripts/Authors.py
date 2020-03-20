@@ -8,7 +8,7 @@ def commaParseFile(filename):
     line_list = f.read().splitlines()
     insertAuthors = 'INSERT INTO Author VALUES\n'
     insertAuthorToPhoneNumber = 'INSERT INTO AuthorToPhoneNumber VALUES\n'
-    insertPhoneNumber = 'INSERT INTO AuthorToPhoneNumber VALUES\n'
+    insertPhoneNumber = 'INSERT INTO Phone VALUES\n'
     for line in line_list:
         split_line = line.split(",")
         authorID = int(split_line[0])
@@ -22,6 +22,7 @@ def commaParseFile(filename):
     insertAuthors = insertAuthors[:-2] + ";"
     insertAuthorToPhoneNumber = insertAuthorToPhoneNumber[:-2] + ";"
     insertPhoneNumber = insertPhoneNumber[:-2] + ";"
+    removeDuplicatePhoneNumbers(insertPhoneNumber)
     writeFile(insertAuthors, "SQLScripts/insertAuthors.sql")
     writeFile(insertAuthorToPhoneNumber, "SQLScripts/insertAuthorToPhoneNumber.sql")
     writeFile(insertPhoneNumber, "SQLScripts/insertPhoneNumber.sql")
@@ -41,12 +42,26 @@ def parsePhoneNumbers(phoneNumbers, authorID):
             type = split_line[1]
         except(IndexError):
             continue
-        authorToPhoneNumber = authorToPhoneNumber + "({}, {}),\n".format(number, authorID)
-        insertIntoPhoneNumber += "({}, {}),\n".format(number, type)
+        authorToPhoneNumber = authorToPhoneNumber + "(\'{}\', \'{}\'),\n".format(number, authorID)
+        insertIntoPhoneNumber += "(\'{}\', \'{}\'),\n".format(number, type)
     return authorToPhoneNumber, insertIntoPhoneNumber
 
+def removeDuplicatePhoneNumbers(insertPhoneNumberCommand):
+    lines = insertPhoneNumberCommand.splitlines()
+    newLines = []
+    numbers = []
+    for line in lines:
 
+        try:
+            number = line.split('\'')[1]
+            if number not in numbers:
+                newLines.append(line)
+                numbers.append(numbers)
 
+        except (IndexError):
+            continue
+
+    print('\n'.join(newLines))
 
 
 
