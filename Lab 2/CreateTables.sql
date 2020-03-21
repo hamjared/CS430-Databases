@@ -4,18 +4,7 @@ create table Member (
   LastName VarChar(30),
   DOB Date NOT NULL,
   PRIMARY KEY(MemberID)
-)
-
-create table Book (
-  ISBN Integer,
-  Title VarChar(50),
-  YearPublished Integer,
-  MemberID Integer,
-  PubID Integer,
-  PRIMARY KEY(ISBN),
-  FOREIGN KEY(MemberID) REFERENCES Member,
-  FOREIGN KEY(PubID) REFERENCES Publisher
-)
+);
 
 create table Publisher (
   PubID Integer,
@@ -23,12 +12,22 @@ create table Publisher (
   PRIMARY KEY(PubID)
 );
 
+create table Book (
+  ISBN VarChar(20),
+  Title VarChar(50),
+  YearPublished Integer,
+  PubID Integer,
+  PRIMARY KEY(ISBN),
+  FOREIGN KEY(PubID) REFERENCES Publisher(PubID)
+);
+
+
 create table Author (
   AuthorID Integer,
   FirstName VarChar(50),
   LastName VarChar(50),
   PRIMARY KEY (AuthorID)
-)
+);
 
 create table Phone (
   PNumber VarChar(20),
@@ -37,12 +36,12 @@ create table Phone (
 );
 
 create table WrittenBy (
-  ISBN VarChar (20),
+  ISBN VarChar(20),
   AuthorID Integer,
-  PRIMARY KEY (ISBN, AuthorID)
-  FOREIGN KEY (ISBN) REFERENCES Book,
-  FOREIGN KEY (AuthorID) REFERENCES Author
-)
+  PRIMARY KEY (ISBN, AuthorID),
+  FOREIGN KEY (ISBN) REFERENCES Book(ISBN),
+  FOREIGN KEY (AuthorID) REFERENCES Author(AuthorID)
+);
 
 create table PublisherToPhoneNumber (
   PubID Integer,
@@ -58,4 +57,14 @@ create table AuthorToPhoneNumber (
   PRIMARY KEY (AuthorID, PNumber),
   FOREIGN KEY (AuthorID) REFERENCES Author(AuthorID) ON DELETE CASCADE,
   FOREIGN KEY (PNumber) REFERENCES Phone(PNumber)
+);
+
+create table BorrowedBy (
+  ISBN VarChar(20),
+  MemberID Integer,
+  CheckoutDate DATE,
+  CheckinDate Date,
+  PRIMARY KEY (ISBN, MemberID, CheckoutDate),
+  FOREIGN KEY (ISBN) REFERENCES Book(ISBN),
+  FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
 );
