@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e97d2b5-ba47-4e9b-a63d-fccf41265b0f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Lab 2/CreateTables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Lab 2/CreateTables.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab 2/PythonScripts/Books.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lab 2/PythonScripts/Books.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertPhoneNumber.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertPhoneNumber.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,39 +11,39 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertIntoWrittenBy.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="50" column="24" lean-forward="true" selection-end-line="50" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab 2/CreateTables.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1190">
-              <caret line="70" lean-forward="true" selection-end-line="70" />
+              <caret line="70" selection-end-line="70" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Lab 2/Queries.sql">
+        <entry file="file://$PROJECT_DIR$/Lab 3/CreateTables.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="53" lean-forward="true" selection-end-line="53" />
+            <state relative-caret-position="527">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertPhoneNumbersToPublishers.sql">
+        <entry file="db://a867bb3b-0a41-485d-b488-36883852d7c0/consoles/Connection">
+          <provider selected="true" editor-type-id="0.CONSOLE">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Lab 2/Queries.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="6" lean-forward="true" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+            <state relative-caret-position="595">
+              <caret line="35" column="11" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -53,8 +51,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertIntoBorrowedBy.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="560">
-              <caret line="122" column="49" lean-forward="true" selection-end-line="122" selection-end-column="49" />
+            <state relative-caret-position="2074">
+              <caret line="122" column="49" selection-end-line="122" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -90,7 +88,7 @@
         <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertBooks.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="476">
-              <caret line="28" column="52" lean-forward="true" selection-end-line="28" selection-end-column="52" />
+              <caret line="28" column="52" selection-end-line="28" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -99,7 +97,7 @@
         <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertPublishers.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
-              <caret line="8" column="20" lean-forward="true" selection-end-line="8" selection-end-column="20" />
+              <caret line="8" column="20" selection-end-line="8" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -125,12 +123,13 @@
         <option value="$PROJECT_DIR$/Lab 2/CreateTables.sql" />
         <option value="$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertPhoneNumber.sql" />
         <option value="$PROJECT_DIR$/Lab 2/Queries.sql" />
+        <option value="$PROJECT_DIR$/Lab 3/CreateTables.sql" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1832" />
-    <option name="y" value="-14" />
+    <option name="x" value="128" />
+    <option name="y" value="-28" />
     <option name="width" value="1936" />
     <option name="height" value="1096" />
   </component>
@@ -142,7 +141,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -158,37 +156,23 @@
             <path>
               <item name="CS430-Databases" type="b2602c69:ProjectViewProjectNode" />
               <item name="CS430-Databases" type="462c0819:PsiDirectoryNode" />
-              <item name="Lab 2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS430-Databases" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS430-Databases" type="462c0819:PsiDirectoryNode" />
-              <item name="Lab 2" type="462c0819:PsiDirectoryNode" />
-              <item name="PythonScripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS430-Databases" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS430-Databases" type="462c0819:PsiDirectoryNode" />
-              <item name="Lab 2" type="462c0819:PsiDirectoryNode" />
-              <item name="PythonScripts" type="462c0819:PsiDirectoryNode" />
-              <item name="Data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CS430-Databases" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CS430-Databases" type="462c0819:PsiDirectoryNode" />
-              <item name="Lab 2" type="462c0819:PsiDirectoryNode" />
-              <item name="PythonScripts" type="462c0819:PsiDirectoryNode" />
-              <item name="SQLScripts" type="462c0819:PsiDirectoryNode" />
+              <item name="Lab 3" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="S:\GitHub\CS430-Databases" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -201,6 +185,16 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="CreateTables.sql" type="OdpsQLRunnerConfigurationType" factoryName="MaxCompute SQL">
+      <odps_target_file>$PROJECT_DIR$/Lab 3/CreateTables.sql</odps_target_file>
+      <odps_output_dir>C:\Users\Jared\AppData\Local\Temp\</odps_output_dir>
+      <job_name />
+      <odps_parameter name="odps.sql.type.system.odps2" value="true" />
+      <odps_parameter name="odps.compiler.runmode" value="Studio" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -216,16 +210,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973656" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.24973656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.32936078" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="Project Explorer" order="3" weight="0.32982087" />
+      <window_info active="true" id="DB Browser" order="4" visible="true" weight="0.32982087" />
+      <window_info id="Job Explorer" order="5" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -233,6 +225,12 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="Console" order="11" />
+      <window_info anchor="bottom" id="DB Execution Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -286,6 +284,55 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertIntoWrittenBy.sql">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="50" column="24" lean-forward="true" selection-end-line="50" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertPhoneNumbersToPublishers.sql">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="6" lean-forward="true" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab 2/CreateTables.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1190">
+          <caret line="70" selection-end-line="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="db://a867bb3b-0a41-485d-b488-36883852d7c0/consoles/Connection">
+      <provider selected="true" editor-type-id="0.CONSOLE">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab 2/Queries.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" column="11" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertIntoBorrowedBy.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2074">
+          <caret line="122" column="49" selection-end-line="122" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertMembers.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="40" selection-end-line="32" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertPhoneNumbersPublishers.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -300,59 +347,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertPublishers.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="20" lean-forward="true" selection-end-line="8" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertBooks.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
-          <caret line="28" column="52" lean-forward="true" selection-end-line="28" selection-end-column="52" />
+          <caret line="28" column="52" selection-end-line="28" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertMembers.sql">
+    <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertPublishers.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="40" selection-end-line="32" selection-end-column="40" />
+        <state relative-caret-position="136">
+          <caret line="8" column="20" selection-end-line="8" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertIntoBorrowedBy.sql">
+    <entry file="file://$PROJECT_DIR$/Lab 3/CreateTables.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="122" column="49" lean-forward="true" selection-end-line="122" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertPhoneNumbersToPublishers.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="6" lean-forward="true" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lab 2/PythonScripts/SQLScripts/insertIntoWrittenBy.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="50" column="24" lean-forward="true" selection-end-line="50" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lab 2/CreateTables.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="70" lean-forward="true" selection-end-line="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lab 2/Queries.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="53" lean-forward="true" selection-end-line="53" />
+        <state relative-caret-position="527">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
         </state>
       </provider>
     </entry>
