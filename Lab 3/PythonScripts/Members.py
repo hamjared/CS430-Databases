@@ -21,10 +21,11 @@ def commaParseFile(filename):
         memberId = comma_split[0]
         firstName = comma_split[1].strip().split(" ")[0]
         lastName =  comma_split[1].strip().split(" ")[1]
+        Gender = comma_split[2].strip()
         DOB = comma_split[3]
         DOB = reformatDate(DOB)
 
-        insertMembers += '({}, \'{}\', \'{}\', \'{}\'),\n'.format(memberId, firstName, lastName, DOB)
+        insertMembers += '({}, \'{}\', \'{}\', \'{}\', \'{}\'),\n'.format(memberId, firstName, lastName, DOB, Gender)
 
         while line_list[i+1][0:2] == '  ' :
             comma_split = line_list[i+1].split(",")

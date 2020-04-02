@@ -77,3 +77,33 @@ create table Library (
   State VARCHAR (2),
   PRIMARY KEY (Name)
 );
+
+create table Shelf(
+    LibraryName VarChar(20),
+    ShelfNumber INTEGER,
+    Floor INTEGER,
+    PRIMARY KEY (LibraryName, ShelfNumber),
+    FOREIGN KEY (LibraryName) REFERENCES Library(Name) ON DELETE CASCADE
+);
+
+create table StoredOn(
+    ISBN VARCHAR(20),
+    LibraryName VARCHAR(20),
+    ShelfNumber INTEGER,
+    TotalCopies INTEGER,
+    PRIMARY KEY (ISBN, LibraryName, ShelfNumber),
+    FOREIGN KEY (LibraryName, ShelfNumber) REFERENCES Shelf(LibraryName, ShelfNumber),
+    FOREIGN KEY (ISBN) REFERENCES Book(ISBN) ON DELETE CASCADE
+
+);
+
+create table Audit(
+    id integer AUTO_INCREMENT,
+    TableName VARCHAR(20),
+    Action VARCHAR(20),
+    DateTime TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
+
+

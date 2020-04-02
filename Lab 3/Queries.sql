@@ -1,53 +1,23 @@
-SELECT * FROM Book
-ORDER BY ISBN;
+insert into Author
+VALUES (305, 'Commander', 'Adams');
 
-SELECT * FROM Member
-ORDER BY LastName, FirstName;
 
-SELECT * FROM Author
-ORDER BY LastName, FirstName;
+insert into Phone
+Values('970-555-5555', '(o)');
 
-SELECT * from Publisher
-ORDER BY Pub_name;
+insert into AuthorToPhoneNumber
+Values (305, '970-555-5555');
 
-SELECT * from Phone
-ORDER BY PNumber;
 
-SELECT * from AuthorToPhoneNumber
-ORDER BY AuthorID;
+INSERT INTO Book
+VALUES ('96-42013-10510', 'Growing your own Weeds', 2012, 10000);
 
-SELECT * FROM PublisherToPhoneNumber
-ORDER BY PubID;
+INSERT INTO StoredOn
+VALUES ('96-42013-10510', 'Main', 8, 1);
 
-Select * FROM BorrowedBy
-ORDER BY ISBN;
 
-SELECT * FROM WrittenBy
-ORDER BY ISBN;
-
-SELECT FirstName, LastName
-FROM Member
-WHERE LastName LIKE 'B%'
-ORDER BY LastName;
-
-SELECT *
-FROM Book NATURAL JOIN Publisher
-WHERE Pub_name = 'Coyote Publishing'
+select Title, Authors, ShelfNumber, LibraryName
+FROM Book_Locations
 ORDER BY Title;
 
-SELECT FirstName, LastName, MemberID, Title
-FROM Member NATURAL JOIN BorrowedBy NATURAL JOIN Book
-Where CheckinDate is NULL
-Order BY MemberID;
-
-SELECT FirstName, LastName, AuthorID, Title
-FROM Author NATURAL JOIN WrittenBy NATURAL JOIN Book
-Order BY AuthorID;
-
-SELECT FirstName, LastName, P1.PNumber
-FROM Author, AuthorToPhoneNumber P1, AuthorToPhoneNumber P2
-WHERE Author.AuthorID = P1.AuthorID and
-    P1.PNumber = P2.PNumber and
-    P1.AuthorID != P2.AuthorID
-ORDER BY P1.PNumber;
 
