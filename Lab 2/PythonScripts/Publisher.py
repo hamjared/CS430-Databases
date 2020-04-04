@@ -23,9 +23,9 @@ def commaParseFile(filename):
     f.close()
     insertPublishers = insertPublishers[:-2] + ";"
     insertPublishersToPhoneNumber = insertPublishersToPhoneNumber[:-2] + ";"
-    writeFile(insertPublishers, "SQLScripts/insertPublishers.sql")
-    writeFile(insertPublishersToPhoneNumber, "SQLScripts/insertPhoneNumbersToPublishers.sql")
-    writeFile(insertPhoneNumbersPublishers, "SQLScripts/insertPhoneNumbersPublishers.sql")
+    writeFile(insertPublishers, "SQLScripts/2_insertPublishers.sql")
+    writeFile(insertPublishersToPhoneNumber, "SQLScripts/5_insertPhoneNumbersToPublishers.sql")
+    writeFile(insertPhoneNumbersPublishers, "SQLScripts/4_insertPhoneNumbersPublishers.sql")
 
 
 

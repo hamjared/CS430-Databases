@@ -52,8 +52,8 @@ def commaParseFile(filename):
     print(insertIntoBorrowedBy)
     insertMembers = insertMembers[:-2] + ";"
     insertIntoBorrowedBy = insertIntoBorrowedBy[:-2] + ";"
-    writeFile(insertMembers, "SQLScripts/insertMembers.sql")
-    writeFile(insertIntoBorrowedBy, "SQLScripts/insertIntoBorrowedBy.sql")
+    writeFile(insertMembers, "SQLScripts/7_insertMembers.sql")
+    writeFile(insertIntoBorrowedBy, "SQLScripts/10_insertIntoBorrowedBy.sql")
 
 def reformatDate(date):
     date = dateparser.parse(date)

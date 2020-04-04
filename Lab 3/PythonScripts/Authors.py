@@ -1,4 +1,4 @@
-
+import re
 def main():
     commaParseFile("./Data/Author.txt")
 
@@ -23,10 +23,10 @@ def commaParseFile(filename):
     insertAuthorToPhoneNumber = insertAuthorToPhoneNumber[:-2] + ";"
     insertPhoneNumber = insertPhoneNumber[:-2] + ";"
     insertPhoneNumber = removeDuplicatePhoneNumbers(insertPhoneNumber)
-    writeFile(insertAuthors, "SQLScripts/insertAuthors.sql")
-    writeFile(insertAuthorToPhoneNumber, "SQLScripts/insertAuthorToPhoneNumber.sql")
-    writeFile(insertPhoneNumber, "SQLScripts/insertPhoneNumber.sql")
-
+    # writeFile(insertAuthors, "SQLScripts/1_insertAuthors.sql")
+    # writeFile(insertAuthorToPhoneNumber, "SQLScripts/6_insertAuthorToPhoneNumber.sql")
+    # writeFile(insertPhoneNumber, "SQLScripts/3_insertPhoneNumber.sql")
+    # print(insertPhoneNumber)
 def writeFile(data, filename):
     f = open(filename, "w+")
     f.write(data)
@@ -39,8 +39,11 @@ def parsePhoneNumbers(phoneNumbers, authorID):
         split_line = phoneNumber.lstrip().split(" ")
         try:
             number = split_line[0]
+            regex = re.compile('([a-zA-z])')
+            print(regex.match(phoneNumber))
             type = split_line[1]
         except(IndexError):
+            print(phoneNumber)
             continue
         authorToPhoneNumber = authorToPhoneNumber + "({}, \'{}\'),\n".format(authorID, number)
         insertIntoPhoneNumber += "(\'{}\', \'{}\'),\n".format(number, type)
