@@ -76,13 +76,13 @@ public class GUI {
 	private void initialize() {
 		frmLibrarySearch = new JFrame();
 		frmLibrarySearch.setTitle("Library Search");
-		frmLibrarySearch.setBounds(100, 100, 500, 383);
+		frmLibrarySearch.setBounds(100, 100, 581, 383);
 		frmLibrarySearch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLibrarySearch.getContentPane().setLayout(null);
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		tabbedPane.setBounds(0, 0, 484, 344);
+		tabbedPane.setBounds(0, 0, 565, 344);
 		frmLibrarySearch.getContentPane().add(tabbedPane);
 		
 		JPanel memberIdTab = new JPanel();
@@ -90,12 +90,12 @@ public class GUI {
 		memberIdTab.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Enter Your Member ID");
-		lblNewLabel.setBounds(6, 10, 150, 19);
+		lblNewLabel.setBounds(6, 10, 209, 19);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		memberIdTab.add(lblNewLabel);
 		
 		memberID = new JTextField();
-		memberID.setBounds(162, 7, 209, 25);
+		memberID.setBounds(225, 7, 209, 25);
 		memberID.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		memberIdTab.add(memberID);
 		memberID.setColumns(10);
@@ -106,7 +106,7 @@ public class GUI {
 				login();
 			}
 		});
-		loginWithMemberID.setBounds(377, 6, 92, 27);
+		loginWithMemberID.setBounds(444, 6, 92, 27);
 		loginWithMemberID.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		memberIdTab.add(loginWithMemberID);
 		
@@ -118,12 +118,12 @@ public class GUI {
 		
 		newMemberPane = new JPanel();
 		newMemberPane.setVisible(false);
-		newMemberPane.setBounds(6, 79, 463, 170);
+		newMemberPane.setBounds(6, 79, 554, 170);
 		memberIdTab.add(newMemberPane);
 		newMemberPane.setLayout(null);
 		
 		newMemberFirstName = new JTextField();
-		newMemberFirstName.setBounds(88, 38, 118, 20);
+		newMemberFirstName.setBounds(110, 38, 118, 20);
 		newMemberFirstName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		newMemberPane.add(newMemberFirstName);
 		newMemberFirstName.setColumns(10);
@@ -134,12 +134,12 @@ public class GUI {
 		newMemberPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Last Name");
-		lblNewLabel_4.setBounds(223, 41, 86, 14);
+		lblNewLabel_4.setBounds(268, 41, 86, 14);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		newMemberPane.add(lblNewLabel_4);
 		
 		newMemberLastName = new JTextField();
-		newMemberLastName.setBounds(316, 38, 118, 20);
+		newMemberLastName.setBounds(378, 38, 118, 20);
 		newMemberLastName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		newMemberPane.add(newMemberLastName);
 		newMemberLastName.setColumns(10);
@@ -156,12 +156,12 @@ public class GUI {
 		newMemberDOB.setColumns(10);
 		
 		JLabel lblNewLabel_6 = new JLabel("Gender");
-		lblNewLabel_6.setBounds(255, 86, 54, 14);
+		lblNewLabel_6.setBounds(300, 86, 54, 14);
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		newMemberPane.add(lblNewLabel_6);
 		
 		newMemberGender = new JComboBox();
-		newMemberGender.setBounds(316, 81, 54, 22);
+		newMemberGender.setBounds(380, 82, 54, 22);
 		newMemberGender.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		newMemberGender.setModel(new DefaultComboBoxModel(new String[] {"", "M", "F"}));
 		newMemberPane.add(newMemberGender);
@@ -187,7 +187,7 @@ public class GUI {
 		newMemberIDPane.setLayout(null);
 		
 		JLabel lblNewLabel_8 = new JLabel("Membership Creation Succesfull, Your Member ID is: ");
-		lblNewLabel_8.setBounds(0, 2, 463, 40);
+		lblNewLabel_8.setBounds(0, 2, 551, 40);
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		newMemberIDPane.add(lblNewLabel_8);
 		
