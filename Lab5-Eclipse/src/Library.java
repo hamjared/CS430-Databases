@@ -11,7 +11,7 @@ public class Library {
     public Library() {
     	try {
             
-            Class.forName("com.mysql.jdbc.Driver");
+//            Class.forName("com.mysql.jdbc.Driver");
 
             String url =
                     "jdbc:mysql://192.168.1.126/library";
