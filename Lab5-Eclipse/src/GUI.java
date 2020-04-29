@@ -353,7 +353,7 @@ public class GUI {
 		// TODO Auto-generated method stub
 		System.out.println("Login");
 		System.out.println("Member ID = " + memberID.getText());
-		if(library.memberIDExists(memberID.getText().strip())) {
+		if(library.memberIDExists(memberID.getText().trim())) {
 			System.out.println("Member Exists");
 			tabbedPane.setEnabledAt(1, true);
 			tabbedPane.setSelectedIndex(1);
