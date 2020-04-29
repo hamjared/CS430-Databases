@@ -73,6 +73,7 @@ public class GUI {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	private void initialize() {
 		frmLibrarySearch = new JFrame();
 		frmLibrarySearch.setTitle("Library Search");
@@ -160,10 +161,10 @@ public class GUI {
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		newMemberPane.add(lblNewLabel_6);
 		
-		newMemberGender = new JComboBox();
+		newMemberGender = new JComboBox<Object>();
 		newMemberGender.setBounds(380, 82, 54, 22);
 		newMemberGender.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		newMemberGender.setModel(new DefaultComboBoxModel(new String[] {"", "M", "F"}));
+		newMemberGender.setModel(new DefaultComboBoxModel<Object>(new String[] {"", "M", "F"}));
 		newMemberPane.add(newMemberGender);
 		
 		JButton createNewMember = new JButton("Submit");
