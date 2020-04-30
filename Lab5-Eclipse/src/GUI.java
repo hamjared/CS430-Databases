@@ -17,9 +17,15 @@ import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 
 public class GUI {
@@ -27,7 +33,7 @@ public class GUI {
 	public JFrame frmLibrarySearch;
 	private JTextField memberID;
 	private JTextField searchField;
-	private JTable searchResults;
+	private JTable searchResultTable;
 	private JTabbedPane tabbedPane;
 	private JLabel idNotFound;
 	private JLabel memberGreeting;
@@ -44,6 +50,11 @@ public class GUI {
 	private JComboBox newMemberGender;
 	private JLabel newMemberID;
 	private JPanel newMemberIDPane;
+	private JLabel invalidFirstNameMessage;
+	private JLabel invalidLastNameMessage;
+	private JLabel invalidDOBMessage;
+	private JLabel invalidGenderMessage;
+	private JLabel isbnFormatLabel;
 
 	/**
 	 * Launch the application.
@@ -133,7 +144,7 @@ public class GUI {
 		newMemberPane.add(newMemberLastName);
 		newMemberLastName.setColumns(10);
 		
-		JLabel lblNewLabel_5 = new JLabel("Birthday (yyyy-m-d)");
+		JLabel lblNewLabel_5 = new JLabel("Birthday (m/d/yyyy)");
 		lblNewLabel_5.setBounds(0, 85, 156, 17);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		newMemberPane.add(lblNewLabel_5);
@@ -169,6 +180,34 @@ public class GUI {
 		lblNewLabel_7.setBounds(111, 0, 323, 14);
 		newMemberPane.add(lblNewLabel_7);
 		
+		invalidFirstNameMessage = new JLabel("Error: cannot be blank or contain non letter characters");
+		invalidFirstNameMessage.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		invalidFirstNameMessage.setForeground(Color.RED);
+		invalidFirstNameMessage.setBounds(0, 57, 306, 14);
+		invalidFirstNameMessage.setVisible(false);
+		newMemberPane.add(invalidFirstNameMessage);
+		
+		invalidLastNameMessage = new JLabel("Error: cannot blank or contain non letter characters");
+		invalidLastNameMessage.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		invalidLastNameMessage.setForeground(Color.RED);
+		invalidLastNameMessage.setBounds(268, 57, 276, 14);
+		invalidLastNameMessage.setVisible(false);
+		newMemberPane.add(invalidLastNameMessage);
+		
+		invalidDOBMessage = new JLabel("Error: Date must be in form m/d/yyyy");
+		invalidDOBMessage.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		invalidDOBMessage.setForeground(Color.RED);
+		invalidDOBMessage.setBounds(0, 105, 228, 14);
+		invalidDOBMessage.setVisible(false);
+		newMemberPane.add(invalidDOBMessage);
+		
+		invalidGenderMessage = new JLabel("Error: Must choose an option");
+		invalidGenderMessage.setForeground(Color.RED);
+		invalidGenderMessage.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		invalidGenderMessage.setBounds(300, 105, 134, 14);
+		invalidGenderMessage.setVisible(false);
+		newMemberPane.add(invalidGenderMessage);
+		
 		newMemberIDPane = new JPanel();
 		newMemberIDPane.setBounds(6, 260, 463, 40);
 		memberIdTab.add(newMemberIDPane);
@@ -191,7 +230,7 @@ public class GUI {
 		bookSearchTab.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 34, 479, 41);
+		panel.setBounds(0, 34, 550, 41);
 		bookSearchTab.add(panel);
 		panel.setLayout(null);
 		
@@ -223,7 +262,7 @@ public class GUI {
 		panel.add(searchByAuthor);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 85, 479, 41);
+		panel_1.setBounds(0, 85, 550, 41);
 		bookSearchTab.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -233,7 +272,7 @@ public class GUI {
 		panel_1.add(lblNewLabel_2);
 		
 		searchField = new JTextField();
-		searchField.setBounds(97, 7, 261, 20);
+		searchField.setBounds(97, 7, 348, 20);
 		panel_1.add(searchField);
 		searchField.setColumns(10);
 		
@@ -243,49 +282,42 @@ public class GUI {
 				search();
 			}
 		});
-		searchButton.setBounds(364, 6, 85, 23);
+		searchButton.setBounds(455, 8, 85, 23);
 		panel_1.add(searchButton);
 		
-		searchResults = new JTable();
-		searchResults.setBorder(new LineBorder(new Color(0, 0, 0)));
-		searchResults.setModel(new DefaultTableModel(
+		isbnFormatLabel = new JLabel("Error: ISBN Format needs to be ##-#####-#####");
+		isbnFormatLabel.setForeground(Color.RED);
+		isbnFormatLabel.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		isbnFormatLabel.setBounds(97, 27, 236, 14);
+		panel_1.add(isbnFormatLabel);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 151, 540, 149);
+		bookSearchTab.add(scrollPane);
+		
+		searchResultTable = new JTable();
+		scrollPane.setViewportView(searchResultTable);
+		searchResultTable.setBorder(new LineBorder(new Color(0, 0, 0)));
+		searchResultTable.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"ISBN", "Title", "Author Last Name", "Author First Name"},
 			},
 			new String[] {
-				"ISBN", "Title", "Author Last Name", "Author First Name"
+				"ISBN", "Title", "Authors"
 			}
-		) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-			@SuppressWarnings("rawtypes")
-			Class[] columnTypes = new Class[] {
-				String.class, Object.class, Object.class, Object.class
-			};
-			@SuppressWarnings({ "unchecked", "rawtypes" })
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				false, true, true, true
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		searchResults.getColumnModel().getColumn(0).setResizable(false);
-		searchResults.setBounds(10, 151, 459, 149);
-		bookSearchTab.add(searchResults);
+		));
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane.setColumnHeaderView(scrollPane_1);
+		searchResultTable.getColumnModel().getColumn(0).setResizable(false);
+		
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(0, 0, 479, 41);
+		panel_2.setBounds(0, 0, 550, 41);
 		bookSearchTab.add(panel_2);
 		panel_2.setLayout(null);
 		
 		memberGreeting = new JLabel("Hello User!");
-		memberGreeting.setBounds(6, 6, 69, 19);
+		memberGreeting.setBounds(6, 6, 335, 19);
 		memberGreeting.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel_2.add(memberGreeting);
 	}
@@ -308,6 +340,7 @@ public class GUI {
 	
 	public void search() {
 		String action = buttonGroup.getSelection().getActionCommand();
+		clearTableResults();
 		switch(action) {
 		case "ISBN":
 			searchByISBN();
@@ -329,23 +362,60 @@ public class GUI {
 	private void searchByTitle() {
 		// TODO Auto-generated method stub
 		System.out.println("Search by Title");
+		this.updateSearchResultsTable(library.searchByTitle(this.searchField.getText().trim()));
+		
 		
 	}
 
 	private void searchByISBN() {
 		// TODO Auto-generated method stub
+		
 		System.out.println("Search by ISBN");
+		String isbn = this.searchField.getText().trim();
+		if(!validateISBNFormat(isbn)) {
+			this.isbnFormatLabel.setVisible(true);
+			return;
+		}
+		
+		String[][] searchResults = library.searchByISBN(isbn);
+		DefaultTableModel tableModel = (DefaultTableModel) searchResultTable.getModel();
+		for (int i = 0 ; i < searchResults.length; i++)
+			tableModel.addRow(searchResults[i]);
+		
+		
+		
 		
 	}
 	
+	private void updateSearchResultsTable(String[][] newRows ) {
+		DefaultTableModel tableModel = (DefaultTableModel) searchResultTable.getModel();
+		for (int i = 0 ; i < newRows.length; i++)
+			tableModel.addRow(newRows[i]);
+	}
+	
+	private void clearTableResults() {
+		// TODO Auto-generated method stub
+		DefaultTableModel tableModel = (DefaultTableModel) searchResultTable.getModel();
+		tableModel.setRowCount(0);
+		
+		
+	}
+
+	private boolean validateISBNFormat(String isbn) {
+		// TODO Auto-generated method stub
+		return isbn.matches("[0-9]{2}-[0-9]{5}-[0-9]{5}");
+	}
+
 	protected void login() {
 		// TODO Auto-generated method stub
 		System.out.println("Login");
 		System.out.println("Member ID = " + memberID.getText());
-		if(library.memberIDExists(memberID.getText().trim())) {
+		String memberName = library.memberIDExists(memberID.getText().trim());
+		if(memberName != null) {
 			System.out.println("Member Exists");
 			tabbedPane.setEnabledAt(1, true);
 			tabbedPane.setSelectedIndex(1);
+			this.memberGreeting.setText("Hello " + memberName + "!");
 		}
 		else {
 			System.out.println("Member Does Not Exists");
@@ -357,7 +427,66 @@ public class GUI {
 	}
 	
 	private void addNewMember() {
-		String memberID = library.addNewMember(this.newMemberFirstName.getText(), this.newMemberLastName.getText(), this.newMemberDOB.getText(), (String)this.newMemberGender.getSelectedItem());
+		this.hideErrorMessages();
+		boolean validEntries = true;
+		if(!validateName(this.newMemberFirstName.getText().trim())) {
+			validEntries = false;
+			this.invalidFirstNameMessage.setVisible(true);
+		}
+		if(!validateName(this.newMemberLastName.getText().trim())) {
+			validEntries = false;
+			this.invalidLastNameMessage.setVisible(true);
+		}
+		if(!this.validateDateFormat(this.newMemberDOB.getText().trim())) {
+			validEntries = false;
+			this.invalidDOBMessage.setVisible(true);
+		}
+		if(((String)this.newMemberGender.getSelectedItem()).trim().isEmpty()) {
+			this.invalidGenderMessage.setVisible(true);
+			validEntries = false;
+		}
+		
+		if(!validEntries) {
+			return;
+		}
+		String memberID = library.addNewMember(this.newMemberFirstName.getText().trim(), this.newMemberLastName.getText().trim(), this.newMemberDOB.getText().trim(), (String)this.newMemberGender.getSelectedItem());
+		this.newMemberID.setText(memberID);
+		this.newMemberIDPane.setVisible(true);
+		
+		
+	}
+	
+	private boolean validateDateFormat(String dateString) {
+		SimpleDateFormat inFormatter = new SimpleDateFormat("mm/dd/yyyy");
+        try {
+			Date date = inFormatter.parse(dateString);
+			if (date != null) {
+				return true;
+			}
+			
+		} catch (ParseException e) {
+		}
+		return false;
+	}
+	
+	private boolean validateName(String name) {
+		if(name.isEmpty()) {
+			return false;
+		}
+		
+		if(!name.matches("[A-Za-z]+")) {
+			return false;
+		}
+		return true;
+		
+	}
+	
+	private void hideErrorMessages() {
+		this.invalidDOBMessage.setVisible(false);
+		this.invalidLastNameMessage.setVisible(false);
+		this.invalidFirstNameMessage.setVisible(false);
+		this.invalidGenderMessage.setVisible(false);
+		this.isbnFormatLabel.setVisible(false);
 		
 	}
 }
