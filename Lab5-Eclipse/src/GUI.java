@@ -263,7 +263,7 @@ public class GUI {
 		JRadioButton searchByAuthor = new JRadioButton("Author (FirstName LastName)");
 		searchByAuthor.setActionCommand("Author");
 		buttonGroup.add(searchByAuthor);
-		searchByAuthor.setBounds(299, 6, 245, 27);
+		searchByAuthor.setBounds(280, 6, 264, 27);
 		searchByAuthor.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(searchByAuthor);
 		
@@ -355,6 +355,7 @@ public class GUI {
 
 	protected void findBookSelected(int rowSelected) {
 		// TODO Auto-generated method stub
+		this.hideErrorMessages();
 		if (rowSelected < 0) {
 			this.noBookSelectedErrorMessage.setVisible(true);
 			return;
