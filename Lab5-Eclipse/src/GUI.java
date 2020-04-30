@@ -43,7 +43,6 @@ public class GUI {
 	private JPanel newMemberPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	@SuppressWarnings("unused")
-	private final Action action = new SwingAction();
 	private JTextField newMemberFirstName;
 	private JTextField newMemberLastName;
 	private JTextField newMemberDOB;
@@ -61,6 +60,9 @@ public class GUI {
 	private static final String isbnFormatErrorMessage = "Error ISBN format must be: ##-#####-#####";
 	private static final String authorFormatErrorMessage = "Author format must be firstName lastName";
 	private JLabel noBookSelectedErrorMessage;
+	private JTable bookLocationTable;
+	private JLabel allCopiesCheckedOutMessage;
+	private JRadioButton searchByISBN;
 
 	/**
 	 * Launch the application.
@@ -214,6 +216,15 @@ public class GUI {
 		invalidGenderMessage.setVisible(false);
 		newMemberPane.add(invalidGenderMessage);
 		
+		JButton noThanks = new JButton("No Thanks");
+		noThanks.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				reset();
+			}
+		});
+		noThanks.setBounds(110, 126, 106, 23);
+		newMemberPane.add(noThanks);
+		
 		newMemberIDPane = new JPanel();
 		newMemberIDPane.setBounds(6, 260, 554, 40);
 		memberIdTab.add(newMemberIDPane);
@@ -245,7 +256,7 @@ public class GUI {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(lblNewLabel_1);
 		
-		JRadioButton searchByISBN = new JRadioButton("ISBN");
+		searchByISBN = new JRadioButton("ISBN");
 		searchByISBN.setActionCommand("ISBN");
 		searchByISBN.setSelected(true);
 		buttonGroup.add(searchByISBN);
@@ -256,7 +267,7 @@ public class GUI {
 		JRadioButton searchByTitle = new JRadioButton("Title Contains");
 		searchByTitle.setActionCommand("Title");
 		buttonGroup.add(searchByTitle);
-		searchByTitle.setBounds(153, 6, 144, 27);
+		searchByTitle.setBounds(153, 6, 130, 27);
 		searchByTitle.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(searchByTitle);
 		
@@ -325,9 +336,18 @@ public class GUI {
 		panel_2.setLayout(null);
 		
 		memberGreeting = new JLabel("Hello User!");
-		memberGreeting.setBounds(6, 6, 335, 19);
+		memberGreeting.setBounds(10, 6, 208, 19);
 		memberGreeting.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel_2.add(memberGreeting);
+		
+		JButton logOutButton = new JButton("Log Out");
+		logOutButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				reset();
+			}
+		});
+		logOutButton.setBounds(451, 6, 89, 23);
+		panel_2.add(logOutButton);
 		
 		JButton slectBook = new JButton("Select Book");
 		slectBook.addActionListener(new ActionListener() {
@@ -346,16 +366,82 @@ public class GUI {
 		noBookSelectedErrorMessage.setBounds(209, 286, 287, 14);
 		bookSearchTab.add(noBookSelectedErrorMessage);
 		
-		JPanel results = new JPanel();
-		tabbedPane.addTab("Search Results", null, results, null);
+		allCopiesCheckedOutMessage = new JLabel("All copies of that book are checked out");
+		allCopiesCheckedOutMessage.setVisible(false);
+		allCopiesCheckedOutMessage.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		allCopiesCheckedOutMessage.setBounds(158, 286, 282, 14);
+		bookSearchTab.add(allCopiesCheckedOutMessage);
+		
+		JPanel resultsTab = new JPanel();
+		tabbedPane.addTab("Search Results", null, resultsTab, null);
+		resultsTab.setLayout(null);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(25, 43, 504, 198);
+		resultsTab.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(0, 0, 504, 198);
+		panel_3.add(scrollPane_2);
+		
+		bookLocationTable = new JTable();
+		bookLocationTable.setRowSelectionAllowed(false);
+		scrollPane_2.setViewportView(bookLocationTable);
+		bookLocationTable.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ISBN", "Title", "Library", "Shelf"
+			}
+		));
+		
+		JLabel lblNewLabel_9 = new JLabel("You can find the book here:");
+		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_9.setBounds(26, 11, 380, 14);
+		resultsTab.add(lblNewLabel_9);
+		
+		JButton btnNewButton = new JButton("Log Out");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				reset();
+			}
+		});
+		btnNewButton.setBounds(214, 261, 89, 23);
+		resultsTab.add(btnNewButton);
 		tabbedPane.setEnabledAt(2, false);
 	}
 	
 
 
+	protected void reset() {
+		// TODO Auto-generated method stub
+		this.hideErrorMessages();
+		this.tabbedPane.setSelectedIndex(0);
+		clearTableResults(this.bookLocationTable);
+		clearTableResults(this.searchResultTable);
+		this.searchField.setText("");
+		this.searchByISBN.setSelected(true);
+		this.memberID.setText("");
+		this.newMemberDOB.setText("");
+		this.newMemberFirstName.setText("");
+		this.newMemberLastName.setText("");
+		this.newMemberGender.setSelectedIndex(0);
+		this.newMemberIDPane.setVisible(false);
+		this.newMemberPane.setVisible(false);
+		tabbedPane.setEnabledAt(1, false);
+		tabbedPane.setEnabledAt(2, false);
+		this.idNotFound.setVisible(false);
+		
+		
+		
+		
+	}
+
 	protected void findBookSelected(int rowSelected) {
 		// TODO Auto-generated method stub
 		this.hideErrorMessages();
+		this.clearTableResults(this.bookLocationTable);
 		if (rowSelected < 0) {
 			this.noBookSelectedErrorMessage.setVisible(true);
 			return;
@@ -364,30 +450,21 @@ public class GUI {
 		
 		
 		if(library.bookAvailable(bookIsbn)) {
-			
+			this.tabbedPane.setEnabledAt(2, true);
+			tabbedPane.setSelectedIndex(2);
+			this.updateSearchResultsTable(library.getBookLocation(bookIsbn), this.bookLocationTable);
+		}
+		else {
+			this.allCopiesCheckedOutMessage.setVisible(true);
 		}
 		
 	}
 
-
-
-	private class SwingAction extends AbstractAction {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-		public void actionPerformed(ActionEvent e) {
-		}
-	}
 	
 	
 	public void search() {
 		String action = buttonGroup.getSelection().getActionCommand();
-		clearTableResults();
+		clearTableResults(this.searchResultTable);
 		this.hideErrorMessages();
 		System.out.println(action);
 		switch(action) {
@@ -412,16 +489,14 @@ public class GUI {
 		}
 		String[] author = this.searchField.getText().trim().split(" ");
 		
-		this.updateSearchResultsTable(library.searchByAuthor(author[0], author[1]));
+		this.updateSearchResultsTable(library.searchByAuthor(author[0], author[1]), searchResultTable);
 		
 	}
 
 	private void searchByTitle() {
 		// TODO Auto-generated method stub
 		System.out.println("Search by Title");
-		this.updateSearchResultsTable(library.searchByTitle(this.searchField.getText().trim()));
-		
-		
+		this.updateSearchResultsTable(library.searchByTitle(this.searchField.getText().trim()), searchResultTable);
 	}
 
 	private void searchByISBN() {
@@ -445,15 +520,15 @@ public class GUI {
 		
 	}
 	
-	private void updateSearchResultsTable(String[][] newRows ) {
-		DefaultTableModel tableModel = (DefaultTableModel) searchResultTable.getModel();
+	private void updateSearchResultsTable(String[][] newRows, JTable table ) {
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		for (int i = 0 ; i < newRows.length; i++)
 			tableModel.addRow(newRows[i]);
 	}
 	
-	private void clearTableResults() {
+	private void clearTableResults(JTable table) {
 		// TODO Auto-generated method stub
-		DefaultTableModel tableModel = (DefaultTableModel) searchResultTable.getModel();
+		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		tableModel.setRowCount(0);
 		
 		
@@ -468,6 +543,11 @@ public class GUI {
 		// TODO Auto-generated method stub
 		System.out.println("Login");
 		System.out.println("Member ID = " + memberID.getText());
+		if(memberID.getText().trim().isEmpty()) {
+			idNotFound.setVisible(true);
+			newMemberPane.setVisible(true);
+			return;
+		}
 		String memberName = library.memberIDExists(memberID.getText().trim());
 		if(memberName != null) {
 			System.out.println("Member Exists");
@@ -509,6 +589,7 @@ public class GUI {
 		}
 		String memberID = library.addNewMember(this.newMemberFirstName.getText().trim(), this.newMemberLastName.getText().trim(), this.newMemberDOB.getText().trim(), (String)this.newMemberGender.getSelectedItem());
 		this.newMemberID.setText(memberID);
+		this.memberID.setText(memberID);
 		this.newMemberIDPane.setVisible(true);
 		
 		
@@ -546,6 +627,7 @@ public class GUI {
 		this.invalidGenderMessage.setVisible(false);
 		this.searchTermFormatError.setVisible(false);
 		noBookSelectedErrorMessage.setVisible(false);
+		allCopiesCheckedOutMessage.setVisible(false);
 		
 	}
 }

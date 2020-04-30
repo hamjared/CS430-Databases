@@ -20,10 +20,10 @@ public class Library {
 
 			//            Class.forName("com.mysql.jdbc.Driver");
 
-			String url =
-					"jdbc:mysql://192.168.1.126/library";
-			//            String url =
-			//                    "jdbc:mysql://faure/jlham?serverTimezone=UTC";
+//			String url =
+//					"jdbc:mysql://192.168.1.126/library";
+            String url =
+                    "jdbc:mysql://faure/jlham?serverTimezone=UTC";
 
 			con = DriverManager.getConnection(
 					url,"jlham", "830645488");
@@ -133,6 +133,14 @@ public class Library {
 		return null;
 	}
 
+	public String [][] getBookLocation(String isbn) {
+		String query = String.format("SELECT ISBN, Title, LibraryName, ShelfNumber\r\n" + 
+				"FROM StoredOn NATURAL JOIN Book\r\n" + 
+				"WHERE ISBN = '%s';", isbn);
+		ResultSet rs = this.executeQuery(query);
+		return this.organizeReturnData(rs, new String [] {"ISBN", "Title", "LibraryName", "ShelfNumber"});
+	}
+	
 	public String[][] searchByTitle(String title){
 		String query = String.format("SELECT ISBN, Book.Title, GROUP_CONCAT(Author.LastName, ' ',Author.FirstName) as Authors\r\n" + 
 				"FROM (Book NATURAL JOIN WrittenBy NATURAL JOIN Author)\r\n" + 
@@ -140,7 +148,7 @@ public class Library {
 				"Group by  Book.Title;", title);
 
 		ResultSet rs = this.executeQuery(query);
-		return this.organizeReturnData(rs);
+		return this.organizeReturnData(rs, new String [] {"ISBN", "Title", "Authors"});
 	}
 	
 	public String [][] searchByAuthor(String firstName, String lastName){
@@ -153,20 +161,20 @@ public class Library {
 				"    )\r\n" + 
 				"Group by  Book.Title;", firstName, lastName);
 		ResultSet rs = this.executeQuery(query);
-		return this.organizeReturnData(rs);
+		return this.organizeReturnData(rs, new String [] {"ISBN", "Title", "Authors"});
 	}
 	
-	private String[][] organizeReturnData(ResultSet rs){
+	private String[][] organizeReturnData(ResultSet rs, String [] columnNames){
 		try {
 			rs.last();
 			int numResults = rs.getRow();
 			rs.beforeFirst();
-			String[][] resultTable = new String[numResults][3];
+			String[][] resultTable = new String[numResults][columnNames.length];
 			int rowIndex = 0;
 			while(rs.next()) {
-				resultTable[rowIndex][0] = rs.getString("ISBN");
-				resultTable[rowIndex][1] = rs.getString("Title");
-				resultTable[rowIndex][2] = rs.getString("Authors");
+				for (int i = 0; i < columnNames.length; i++) {
+					resultTable[rowIndex][i] = rs.getString(columnNames[i]);
+				}
 				rowIndex++;
 
 			}
