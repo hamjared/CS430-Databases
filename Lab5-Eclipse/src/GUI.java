@@ -63,6 +63,7 @@ public class GUI {
 	private JTable bookLocationTable;
 	private JLabel allCopiesCheckedOutMessage;
 	private JRadioButton searchByISBN;
+	private JLabel noSearchResults;
 
 	/**
 	 * Launch the application.
@@ -158,7 +159,7 @@ public class GUI {
 		newMemberPane.add(lblNewLabel_5);
 		
 		newMemberDOB = new JTextField();
-		newMemberDOB.setBounds(142, 83, 86, 20);
+		newMemberDOB.setBounds(142, 83, 102, 20);
 		newMemberDOB.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		newMemberPane.add(newMemberDOB);
 		newMemberDOB.setColumns(10);
@@ -222,7 +223,7 @@ public class GUI {
 				reset();
 			}
 		});
-		noThanks.setBounds(110, 126, 106, 23);
+		noThanks.setBounds(110, 126, 134, 23);
 		newMemberPane.add(noThanks);
 		
 		newMemberIDPane = new JPanel();
@@ -245,6 +246,13 @@ public class GUI {
 		tabbedPane.addTab("Book Search", null, bookSearchTab, null);
 		tabbedPane.setEnabledAt(1, false);
 		bookSearchTab.setLayout(null);
+		
+		noSearchResults = new JLabel("Library does not have any books matching your search terms");
+		noSearchResults.setVisible(false);
+		noSearchResults.setHorizontalAlignment(SwingConstants.CENTER);
+		noSearchResults.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		noSearchResults.setBounds(10, 125, 540, 129);
+		bookSearchTab.add(noSearchResults);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 34, 550, 41);
@@ -346,7 +354,7 @@ public class GUI {
 				reset();
 			}
 		});
-		logOutButton.setBounds(451, 6, 89, 23);
+		logOutButton.setBounds(420, 6, 120, 23);
 		panel_2.add(logOutButton);
 		
 		JButton slectBook = new JButton("Select Book");
@@ -407,7 +415,7 @@ public class GUI {
 				reset();
 			}
 		});
-		btnNewButton.setBounds(214, 261, 89, 23);
+		btnNewButton.setBounds(214, 261, 119, 23);
 		resultsTab.add(btnNewButton);
 		tabbedPane.setEnabledAt(2, false);
 	}
@@ -497,6 +505,7 @@ public class GUI {
 		// TODO Auto-generated method stub
 		System.out.println("Search by Title");
 		this.updateSearchResultsTable(library.searchByTitle(this.searchField.getText().trim()), searchResultTable);
+		
 	}
 
 	private void searchByISBN() {
@@ -511,9 +520,7 @@ public class GUI {
 		}
 		
 		String[][] searchResults = library.searchByISBN(isbn);
-		DefaultTableModel tableModel = (DefaultTableModel) searchResultTable.getModel();
-		for (int i = 0 ; i < searchResults.length; i++)
-			tableModel.addRow(searchResults[i]);
+		this.updateSearchResultsTable(searchResults, searchResultTable);
 		
 		
 		
@@ -521,6 +528,9 @@ public class GUI {
 	}
 	
 	private void updateSearchResultsTable(String[][] newRows, JTable table ) {
+		if(newRows.length == 0) {
+			this.noSearchResults.setVisible(true);
+		}
 		DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
 		for (int i = 0 ; i < newRows.length; i++)
 			tableModel.addRow(newRows[i]);
@@ -628,6 +638,7 @@ public class GUI {
 		this.searchTermFormatError.setVisible(false);
 		noBookSelectedErrorMessage.setVisible(false);
 		allCopiesCheckedOutMessage.setVisible(false);
+		noSearchResults.setVisible(false);
 		
 	}
 }
