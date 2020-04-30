@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
@@ -26,6 +27,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class GUI {
@@ -54,7 +57,10 @@ public class GUI {
 	private JLabel invalidLastNameMessage;
 	private JLabel invalidDOBMessage;
 	private JLabel invalidGenderMessage;
-	private JLabel isbnFormatLabel;
+	private JLabel searchTermFormatError;
+	private static final String isbnFormatErrorMessage = "Error ISBN format must be: ##-#####-#####";
+	private static final String authorFormatErrorMessage = "Author format must be firstName lastName";
+	private JLabel noBookSelectedErrorMessage;
 
 	/**
 	 * Launch the application.
@@ -209,19 +215,19 @@ public class GUI {
 		newMemberPane.add(invalidGenderMessage);
 		
 		newMemberIDPane = new JPanel();
-		newMemberIDPane.setBounds(6, 260, 463, 40);
+		newMemberIDPane.setBounds(6, 260, 554, 40);
 		memberIdTab.add(newMemberIDPane);
 		newMemberIDPane.setVisible(false);
 		newMemberIDPane.setLayout(null);
 		
 		JLabel lblNewLabel_8 = new JLabel("Membership Creation Succesfull, Your Member ID is: ");
-		lblNewLabel_8.setBounds(0, 2, 551, 40);
+		lblNewLabel_8.setBounds(0, 2, 390, 40);
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		newMemberIDPane.add(lblNewLabel_8);
 		
 		newMemberID = new JLabel("New label");
 		newMemberID.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		newMemberID.setBounds(358, 15, 95, 14);
+		newMemberID.setBounds(400, 15, 115, 14);
 		newMemberIDPane.add(newMemberID);
 		
 		JPanel bookSearchTab = new JPanel();
@@ -250,14 +256,14 @@ public class GUI {
 		JRadioButton searchByTitle = new JRadioButton("Title Contains");
 		searchByTitle.setActionCommand("Title");
 		buttonGroup.add(searchByTitle);
-		searchByTitle.setBounds(153, 6, 113, 27);
+		searchByTitle.setBounds(153, 6, 144, 27);
 		searchByTitle.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(searchByTitle);
 		
-		JRadioButton searchByAuthor = new JRadioButton("Author");
+		JRadioButton searchByAuthor = new JRadioButton("Author (FirstName LastName)");
 		searchByAuthor.setActionCommand("Author");
 		buttonGroup.add(searchByAuthor);
-		searchByAuthor.setBounds(272, 6, 69, 27);
+		searchByAuthor.setBounds(299, 6, 245, 27);
 		searchByAuthor.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(searchByAuthor);
 		
@@ -267,12 +273,12 @@ public class GUI {
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel_2 = new JLabel("Search Term");
-		lblNewLabel_2.setBounds(6, 8, 85, 19);
+		lblNewLabel_2.setBounds(6, 8, 112, 19);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel_1.add(lblNewLabel_2);
 		
 		searchField = new JTextField();
-		searchField.setBounds(97, 7, 348, 20);
+		searchField.setBounds(128, 7, 317, 20);
 		panel_1.add(searchField);
 		searchField.setColumns(10);
 		
@@ -282,20 +288,22 @@ public class GUI {
 				search();
 			}
 		});
-		searchButton.setBounds(455, 8, 85, 23);
+		searchButton.setBounds(455, 4, 85, 23);
 		panel_1.add(searchButton);
 		
-		isbnFormatLabel = new JLabel("Error: ISBN Format needs to be ##-#####-#####");
-		isbnFormatLabel.setForeground(Color.RED);
-		isbnFormatLabel.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		isbnFormatLabel.setBounds(97, 27, 236, 14);
-		panel_1.add(isbnFormatLabel);
+		searchTermFormatError = new JLabel("Error: ISBN Format needs to be ##-#####-#####");
+		searchTermFormatError.setForeground(Color.RED);
+		searchTermFormatError.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		searchTermFormatError.setBounds(128, 27, 236, 14);
+		searchTermFormatError.setVisible(false);
+		panel_1.add(searchTermFormatError);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 151, 540, 149);
+		scrollPane.setBounds(10, 137, 540, 125);
 		bookSearchTab.add(scrollPane);
 		
 		searchResultTable = new JTable();
+		searchResultTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(searchResultTable);
 		searchResultTable.setBorder(new LineBorder(new Color(0, 0, 0)));
 		searchResultTable.setModel(new DefaultTableModel(
@@ -320,8 +328,46 @@ public class GUI {
 		memberGreeting.setBounds(6, 6, 335, 19);
 		memberGreeting.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel_2.add(memberGreeting);
+		
+		JButton slectBook = new JButton("Select Book");
+		slectBook.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int rowSelected = searchResultTable.getSelectedRow();
+				findBookSelected(rowSelected);
+			}
+		});
+		slectBook.setBounds(229, 265, 132, 23);
+		bookSearchTab.add(slectBook);
+		
+		noBookSelectedErrorMessage = new JLabel("Please select a book from the table above");
+		noBookSelectedErrorMessage.setVisible(false);
+		noBookSelectedErrorMessage.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		noBookSelectedErrorMessage.setForeground(Color.RED);
+		noBookSelectedErrorMessage.setBounds(209, 286, 287, 14);
+		bookSearchTab.add(noBookSelectedErrorMessage);
+		
+		JPanel results = new JPanel();
+		tabbedPane.addTab("Search Results", null, results, null);
+		tabbedPane.setEnabledAt(2, false);
 	}
 	
+
+
+	protected void findBookSelected(int rowSelected) {
+		// TODO Auto-generated method stub
+		if (rowSelected < 0) {
+			this.noBookSelectedErrorMessage.setVisible(true);
+			return;
+		}
+		String bookIsbn = (String) this.searchResultTable.getValueAt(rowSelected, 0);
+		
+		
+		if(library.bookAvailable(bookIsbn)) {
+			
+		}
+		
+	}
+
 
 
 	private class SwingAction extends AbstractAction {
@@ -341,6 +387,8 @@ public class GUI {
 	public void search() {
 		String action = buttonGroup.getSelection().getActionCommand();
 		clearTableResults();
+		this.hideErrorMessages();
+		System.out.println(action);
 		switch(action) {
 		case "ISBN":
 			searchByISBN();
@@ -356,6 +404,14 @@ public class GUI {
 
 	private void searchByAuthor() {
 		System.out.println("Search by Author");
+		if(!this.searchField.getText().trim().matches("[A-Za-z]+ [A-Za-z]+")) {
+			this.searchTermFormatError.setText(authorFormatErrorMessage);
+			this.searchTermFormatError.setVisible(true);
+			return;
+		}
+		String[] author = this.searchField.getText().trim().split(" ");
+		
+		this.updateSearchResultsTable(library.searchByAuthor(author[0], author[1]));
 		
 	}
 
@@ -373,7 +429,8 @@ public class GUI {
 		System.out.println("Search by ISBN");
 		String isbn = this.searchField.getText().trim();
 		if(!validateISBNFormat(isbn)) {
-			this.isbnFormatLabel.setVisible(true);
+			this.searchTermFormatError.setText(this.isbnFormatErrorMessage);
+			this.searchTermFormatError.setVisible(true);
 			return;
 		}
 		
@@ -486,7 +543,8 @@ public class GUI {
 		this.invalidLastNameMessage.setVisible(false);
 		this.invalidFirstNameMessage.setVisible(false);
 		this.invalidGenderMessage.setVisible(false);
-		this.isbnFormatLabel.setVisible(false);
+		this.searchTermFormatError.setVisible(false);
+		noBookSelectedErrorMessage.setVisible(false);
 		
 	}
 }
