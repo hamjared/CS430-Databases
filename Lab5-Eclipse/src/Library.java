@@ -104,7 +104,7 @@ public class Library {
 	}
 
 	public String[][] searchByISBN(String isbn){
-		String query = String.format("SELECT ISBN, Book.Title, GROUP_CONCAT(Author.LastName, ' ',Author.FirstName) as Authors\r\n" + 
+		String query = String.format("SELECT ISBN, Book.Title, GROUP_CONCAT(Author.FisrtName, ' ',Author.LastName) as Authors\r\n" + 
 				"FROM (Book NATURAL JOIN WrittenBy NATURAL JOIN Author)\r\n" + 
 				"WHERE isbn = '%s'\n" +
 				"Group by  Book.Title;", isbn);
