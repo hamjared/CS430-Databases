@@ -9,3 +9,6 @@ If you wish to not compile, you can run the jar located in the build folder.
 
 $ cd build
 $ java -jar Lab5-StateCapitals.jar
+
+
+The database connection url is defined in Library.java on Line 25.

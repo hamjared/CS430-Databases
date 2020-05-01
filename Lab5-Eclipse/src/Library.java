@@ -20,10 +20,10 @@ public class Library {
 
 			//            Class.forName("com.mysql.jdbc.Driver");
 
-			String url =
-					"jdbc:mysql://192.168.1.126/library";
-//            String url =
-//                    "jdbc:mysql://faure/jlham?serverTimezone=UTC";
+//			String url =
+//					"jdbc:mysql://192.168.1.126/library";
+            String url =
+                    "jdbc:mysql://faure/jlham?serverTimezone=UTC";
 
 			con = DriverManager.getConnection(
 					url,"jlham", "830645488");

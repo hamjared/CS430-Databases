@@ -1,5 +1,3 @@
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
@@ -14,9 +12,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ButtonGroup;
-import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
-import javax.swing.Action;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,9 +22,6 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 
 public class GUI {
